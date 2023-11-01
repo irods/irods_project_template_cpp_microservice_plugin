@@ -73,7 +73,7 @@ target_link_libraries(
     #${IRODS_EXTERNALS_FULLPATH_BOOST}/lib/libboost_filesystem.so
     #${IRODS_EXTERNALS_FULLPATH_BOOST}/lib/libboost_system.so
     #${IRODS_EXTERNALS_FULLPATH_FMT}/lib/libfmt.so
-    #dl
+    #${CMAKE_DL_LIBS}
     )
 
 install(TARGETS ${MICROSERVICE_NAME}
