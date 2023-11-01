@@ -18,7 +18,7 @@ project(irods_project_template_cpp_microservice VERSION "${IRODS_PLUGIN_VERSION}
 # Include this module to inherit iRODS's defaults for RPATH/RUNPATH handling
 include(IrodsRunpathDefaults)
 
-include(${IRODS_TARGETS_PATH})
+include("${IRODS_TARGETS_PATH}")
 include(GNUInstallDirs)
 include(UseLibCXX)
 
@@ -45,7 +45,7 @@ endif()
 
 set(MICROSERVICE_NAME msi_rotate_string)
 
-add_library(${MICROSERVICE_NAME} MODULE ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
+add_library(${MICROSERVICE_NAME} MODULE "${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp")
 
 target_compile_options(${MICROSERVICE_NAME} PRIVATE -Wall -Wextra)
 #target_compile_options(${MICROSERVICE_NAME} PRIVATE -Wno-write-strings)
@@ -62,29 +62,29 @@ target_include_directories(
     ${MICROSERVICE_NAME}
     PRIVATE
     ${IRODS_INCLUDE_DIRS}
-    ${IRODS_EXTERNALS_FULLPATH_BOOST}/include
-    ${IRODS_EXTERNALS_FULLPATH_SPDLOG}/include
-    ${IRODS_EXTERNALS_FULLPATH_FMT}/include)
+    "${IRODS_EXTERNALS_FULLPATH_BOOST}/include"
+    "${IRODS_EXTERNALS_FULLPATH_SPDLOG}/include"
+    "${IRODS_EXTERNALS_FULLPATH_FMT}/include")
 
 target_link_libraries(
     ${MICROSERVICE_NAME}
     PRIVATE
     irods_server
-    #${IRODS_EXTERNALS_FULLPATH_BOOST}/lib/libboost_filesystem.so
-    #${IRODS_EXTERNALS_FULLPATH_BOOST}/lib/libboost_system.so
-    #${IRODS_EXTERNALS_FULLPATH_FMT}/lib/libfmt.so
+    #"${IRODS_EXTERNALS_FULLPATH_BOOST}/lib/libboost_filesystem.so"
+    #"${IRODS_EXTERNALS_FULLPATH_BOOST}/lib/libboost_system.so"
+    #"${IRODS_EXTERNALS_FULLPATH_FMT}/lib/libfmt.so"
     #${CMAKE_DL_LIBS}
     )
 
 install(TARGETS ${MICROSERVICE_NAME}
-        LIBRARY DESTINATION ${IRODS_PLUGINS_DIRECTORY}/microservices)
+        LIBRARY DESTINATION "${IRODS_PLUGINS_DIRECTORY}/microservices")
 
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/packaging/test_project_template_cpp_microservice.py
-        DESTINATION ${IRODS_HOME_DIRECTORY}/scripts/irods/test
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/packaging/test_project_template_cpp_microservice.py"
+        DESTINATION "${IRODS_HOME_DIRECTORY}/scripts/irods/test"
         PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ)
 
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/packaging/run_project_template_cpp_microservice_test.py
-        DESTINATION ${IRODS_HOME_DIRECTORY}/scripts
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/packaging/run_project_template_cpp_microservice_test.py"
+        DESTINATION "${IRODS_HOME_DIRECTORY}/scripts"
         PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ)
 
 set(PLUGIN_PACKAGE_NAME irods-microservice-${MICROSERVICE_NAME})
