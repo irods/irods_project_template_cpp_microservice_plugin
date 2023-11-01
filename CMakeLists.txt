@@ -37,11 +37,17 @@ endif()
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
+set(IRODS_BUILD_WITH_WERROR OFF CACHE BOOL "Choose whether to compile with -Werror.")
+
+if (IRODS_BUILD_WITH_WERROR)
+  add_compile_options(-Werror)
+endif()
+
 set(MICROSERVICE_NAME msi_rotate_string)
 
 add_library(${MICROSERVICE_NAME} MODULE ${CMAKE_SOURCE_DIR}/src/main.cpp)
 
-target_compile_options(${MICROSERVICE_NAME} PRIVATE -Wall -Wextra -Werror)
+target_compile_options(${MICROSERVICE_NAME} PRIVATE -Wall -Wextra)
 #target_compile_options(${MICROSERVICE_NAME} PRIVATE -Wno-write-strings)
 
 target_compile_definitions(
