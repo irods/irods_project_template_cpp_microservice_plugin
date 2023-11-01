@@ -41,15 +41,15 @@ if (IRODS_BUILD_WITH_WERROR)
   add_compile_options(-Werror)
 endif()
 
-set(MICROSERVICE_NAME msi_rotate_string)
+set(IRODS_MICROSERVICE_NAME msi_rotate_string)
 
-add_library(${MICROSERVICE_NAME} MODULE "${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp")
+add_library(${IRODS_MICROSERVICE_NAME} MODULE "${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp")
 
-target_compile_options(${MICROSERVICE_NAME} PRIVATE -Wall -Wextra)
-#target_compile_options(${MICROSERVICE_NAME} PRIVATE -Wno-write-strings)
+target_compile_options(${IRODS_MICROSERVICE_NAME} PRIVATE -Wall -Wextra)
+#target_compile_options(${IRODS_MICROSERVICE_NAME} PRIVATE -Wno-write-strings)
 
 target_compile_definitions(
-    ${MICROSERVICE_NAME}
+    ${IRODS_MICROSERVICE_NAME}
     PRIVATE
     #${IRODS_COMPILE_DEFINITIONS}
     ${IRODS_COMPILE_DEFINITIONS_PRIVATE}
@@ -57,7 +57,7 @@ target_compile_definitions(
     IRODS_ENABLE_SYSLOG)
 
 target_include_directories(
-    ${MICROSERVICE_NAME}
+    ${IRODS_MICROSERVICE_NAME}
     PRIVATE
     ${IRODS_INCLUDE_DIRS}
     "${IRODS_EXTERNALS_FULLPATH_BOOST}/include"
@@ -65,7 +65,7 @@ target_include_directories(
     "${IRODS_EXTERNALS_FULLPATH_FMT}/include")
 
 target_link_libraries(
-    ${MICROSERVICE_NAME}
+    ${IRODS_MICROSERVICE_NAME}
     PRIVATE
     irods_server
     #"${IRODS_EXTERNALS_FULLPATH_BOOST}/lib/libboost_filesystem.so"
@@ -74,7 +74,7 @@ target_link_libraries(
     #${CMAKE_DL_LIBS}
     )
 
-install(TARGETS ${MICROSERVICE_NAME}
+install(TARGETS ${IRODS_MICROSERVICE_NAME}
         LIBRARY DESTINATION "${IRODS_PLUGINS_DIRECTORY}/microservices")
 
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/packaging/test_project_template_cpp_microservice.py"
@@ -85,7 +85,7 @@ install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/packaging/run_project_template_cpp_mi
         DESTINATION "${IRODS_HOME_DIRECTORY}/scripts"
         PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ)
 
-set(PLUGIN_PACKAGE_NAME irods-microservice-${MICROSERVICE_NAME})
+set(PLUGIN_PACKAGE_NAME irods-microservice-${IRODS_MICROSERVICE_NAME})
 
 include(IrodsCPackCommon)
 
