@@ -1,2 +1,2 @@
-# irods_project_template_cpp_microservice
-A project template for creating iRODS Microservices using C++
+# irods_project_template_cpp_microservice_plugin
+A project template for creating iRODS Microservice plugins using C++
